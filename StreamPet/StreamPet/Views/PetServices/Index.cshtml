@@ -3,6 +3,12 @@
 @{
     ViewData["Title"] = "Index";
 }
+<script>
+    $(document).ready(function () {
+    $('#tblPet').DataTable();
+});
+
+</script>
 
 <h1>Index</h1>
 
@@ -11,7 +17,7 @@
 </p>
 
 <div class="container row">
-<table class="table col border border-primary">
+<table class="table col border border-primary" id="tblPet">
     <thead>
         <tr>
             <th>
