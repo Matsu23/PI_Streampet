@@ -1,4 +1,4 @@
 ﻿body {
     background-image: url('../media/background.jpg');
-    background-size:cover;
+    background-size:contain;
 }
