@@ -10,8 +10,8 @@ using StreamPet.Models;
 namespace StreamPet.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220518200418_InitialMigration_PetServices")]
-    partial class InitialMigration_PetServices
+    [Migration("20220607013741_migration")]
+    partial class migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -48,6 +48,33 @@ namespace StreamPet.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PetServices");
+                });
+
+            modelBuilder.Entity("StreamPet.Models.Usuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Perfil")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Usuarios");
                 });
 #pragma warning restore 612, 618
         }

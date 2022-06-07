@@ -13,6 +13,6 @@ namespace StreamPet.Models
 
         public DbSet<PetService> PetServices { get; set; }
 
-        public DbSet<StreamPet.Models.Usuario>? Usuario { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
     }
 }

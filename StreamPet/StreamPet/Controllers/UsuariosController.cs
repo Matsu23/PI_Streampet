@@ -21,20 +21,20 @@ namespace StreamPet.Controllers
         // GET: Usuarios
         public async Task<IActionResult> Index()
         {
-              return _context.Usuario != null ? 
-                          View(await _context.Usuario.ToListAsync()) :
-                          Problem("Entity set 'DataContext.Usuario'  is null.");
+              return _context.Usuarios != null ? 
+                          View(await _context.Usuarios.ToListAsync()) :
+                          Problem("Entity set 'DataContext.Usuarios'  is null.");
         }
 
         // GET: Usuarios/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Usuario == null)
+            if (id == null || _context.Usuarios == null)
             {
                 return NotFound();
             }
 
-            var usuario = await _context.Usuario
+            var usuario = await _context.Usuarios
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (usuario == null)
             {
@@ -55,7 +55,7 @@ namespace StreamPet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id")] Usuario usuario)
+        public async Task<IActionResult> Create([Bind("Id,Name,Email,Senha,Perfil")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
@@ -69,12 +69,12 @@ namespace StreamPet.Controllers
         // GET: Usuarios/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Usuario == null)
+            if (id == null || _context.Usuarios == null)
             {
                 return NotFound();
             }
 
-            var usuario = await _context.Usuario.FindAsync(id);
+            var usuario = await _context.Usuarios.FindAsync(id);
             if (usuario == null)
             {
                 return NotFound();
@@ -87,7 +87,7 @@ namespace StreamPet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id")] Usuario usuario)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Email,Senha,Perfil")] Usuario usuario)
         {
             if (id != usuario.Id)
             {
@@ -120,12 +120,12 @@ namespace StreamPet.Controllers
         // GET: Usuarios/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Usuario == null)
+            if (id == null || _context.Usuarios == null)
             {
                 return NotFound();
             }
 
-            var usuario = await _context.Usuario
+            var usuario = await _context.Usuarios
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (usuario == null)
             {
@@ -140,14 +140,14 @@ namespace StreamPet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Usuario == null)
+            if (_context.Usuarios == null)
             {
-                return Problem("Entity set 'DataContext.Usuario'  is null.");
+                return Problem("Entity set 'DataContext.Usuarios'  is null.");
             }
-            var usuario = await _context.Usuario.FindAsync(id);
+            var usuario = await _context.Usuarios.FindAsync(id);
             if (usuario != null)
             {
-                _context.Usuario.Remove(usuario);
+                _context.Usuarios.Remove(usuario);
             }
             
             await _context.SaveChangesAsync();
@@ -156,7 +156,7 @@ namespace StreamPet.Controllers
 
         private bool UsuarioExists(int id)
         {
-          return (_context.Usuario?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Usuarios?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

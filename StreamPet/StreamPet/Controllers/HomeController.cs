@@ -18,6 +18,11 @@ namespace StreamPet.Controllers
             return View();
         }
 
+        public IActionResult testelogin()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
