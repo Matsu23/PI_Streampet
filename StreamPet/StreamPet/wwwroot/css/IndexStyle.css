@@ -2,3 +2,8 @@
     background-image: url('../media/background.jpg');
     background-size:cover;
 }
+
+.Busca:focus {
+    width: 100px;
+    transition: ease-in-out, width .35s ease-in-out;
+}

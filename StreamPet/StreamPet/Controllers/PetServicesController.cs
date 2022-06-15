@@ -19,11 +19,25 @@ namespace StreamPet.Controllers
         }
 
         // GET: PetServices
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? search)
         {
-              return _context.PetServices != null ? 
-                          View(await _context.PetServices.ToListAsync()) :
-                          Problem("Entity set 'DataContext.PetServices'  is null.");
+
+
+            var Search=search;
+
+            if (Search == null)
+            {
+                return _context.PetServices != null ?
+                            View(await _context.PetServices.ToListAsync()) :
+                            Problem("Entity set 'DataContext.PetServices'  is null.");
+            }
+
+
+            return _context.PetServices != null ?
+                            View(await _context.PetServices.ToListAsync()) :
+                            Problem("Entity set 'DataContext.PetServices'  is null.");
+
+            
         }
 
         // GET: PetServices/Details/5
