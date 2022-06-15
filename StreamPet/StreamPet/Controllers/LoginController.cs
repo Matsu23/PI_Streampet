@@ -3,6 +3,7 @@ using StreamPet.Models;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql;
 using MySql.Data.MySqlClient;
+using StreamPet.Helper;
 
 namespace StreamPet.Controllers
 {
@@ -12,16 +13,26 @@ namespace StreamPet.Controllers
     {
 
         private readonly DataContext _context;
+        private readonly Helper.ISession _sessao;
 
-        public LoginController(DataContext context)
+
+        public LoginController(DataContext context, Helper.ISession sessao)
         {
             _context = context;
+            _sessao = sessao;
         }
 
         
         public IActionResult Index()
         {
+            if(_sessao.getSession() != null) return RedirectToAction("Index","Home");
             return View();
+        }
+
+        public IActionResult Logout()
+        {
+            _sessao.RemoveUserSession();
+            return RedirectToAction("Index", "Login");
         }
 
         public DataContext Get_context()
@@ -38,17 +49,17 @@ namespace StreamPet.Controllers
 
             try {
 
-                var query = logins.Where(x => x.Email == loginModel.Login && x.Senha == loginModel.Senha).ToListAsync();
+                var query = logins.Where(x => x.Name == loginModel.Login && x.Senha == loginModel.Senha).ToListAsync();
                 
 
                 if (ModelState.IsValid)
                 {
                     if(query.Result.Count > 0)
                     {
-                        
 
-         
-                            return RedirectToAction("testelogin", "Home");
+
+                        _sessao.CreateUserSession(loginModel);
+                            return RedirectToAction("Index", "Home");
 
                         
 
